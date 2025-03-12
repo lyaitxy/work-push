@@ -57,14 +57,22 @@ public class GaoDeController {
         JSONArray datas = JSONObject.parseObject(response.getBody()).getJSONObject("content").getJSONArray("datas");
 
         List<Map<String, Object>> dataList = JSON.parseObject(datas.toJSONString(), List.class);
-        log.info("dataList:{}", dataList.get(0).get("workLocations"));
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            GaoDeWork gaoDeJob = objectMapper.convertValue(dataList.get(0), GaoDeWork.class);
-            log.info("gaoDeJob:{}", gaoDeJob.toString());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        for(Map<String, Object> data : dataList) {
+            try {
+                ObjectMapper objectMapper = new ObjectMapper();
+                GaoDeWork gaoDeJob = objectMapper.convertValue(data, GaoDeWork.class);
+                if(data.get("categoryType") == "internship") {
+                    gaoDeJob.setCategoryType("暑期实习");
+                } else if(data.get("categoryType") == "project") {
+                    gaoDeJob.setCategoryType("日常实习");
+                } else if(data.get("categoryType") == "freshman") {
+                    gaoDeJob.setCategoryType("应届校招");
+                }
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
+
 
 //        for (Map.Entry<String, Object> entry : dataList.get(0).entrySet()) {
 //            log.info("key为：{},value为：{}", entry.getKey(), entry.getValue());

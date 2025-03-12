@@ -13,8 +13,6 @@ import java.util.List;
 public class GaoDeWork {
     // 岗位名称
     String name;
-    // 毕业要求
-    GraduationTime graduationTime;
     // 更新时间
     @JsonDeserialize(using = TimestampToLocalDateTimeDeserializer.class)
     LocalDateTime modifyTime;
@@ -24,14 +22,7 @@ public class GaoDeWork {
     String requirement;
     // 描述
     String description;
-    // 岗位类型，internship, freshman
+    // 岗位类型，实习生, 日常实习，应届校招
     String categoryType;
 
-    @Data
-    static class GraduationTime {
-        @JsonDeserialize(using = TimestampToLocalDateTimeDeserializer.class)
-        LocalDateTime from;
-        @JsonDeserialize(using = TimestampToLocalDateTimeDeserializer.class)
-        LocalDateTime to;
-    }
 }
