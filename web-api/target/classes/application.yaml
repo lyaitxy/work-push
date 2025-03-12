@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: work-push
+server:
+  port: 8090
