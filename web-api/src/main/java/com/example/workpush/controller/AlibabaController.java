@@ -1,20 +1,18 @@
 package com.example.workpush.controller;
 
-import ch.qos.logback.classic.Logger;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.workpush.pojo.entity.GaoDeWork;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.example.workpush.utils.TimestampToLocalDateTimeDeserializer;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +20,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/gao-de")
 @Slf4j
-public class GaoDeController {
+public class AlibabaController {
     @Resource
     private RestTemplate restTemplate;
 
@@ -58,26 +56,14 @@ public class GaoDeController {
 
         List<Map<String, Object>> dataList = JSON.parseObject(datas.toJSONString(), List.class);
         for(Map<String, Object> data : dataList) {
-            try {
-                ObjectMapper objectMapper = new ObjectMapper();
-                GaoDeWork gaoDeJob = objectMapper.convertValue(data, GaoDeWork.class);
-                if(data.get("categoryType") == "internship") {
-                    gaoDeJob.setCategoryType("暑期实习");
-                } else if(data.get("categoryType") == "project") {
-                    gaoDeJob.setCategoryType("日常实习");
-                } else if(data.get("categoryType") == "freshman") {
-                    gaoDeJob.setCategoryType("应届校招");
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            // 获得id
+            Object trackId = data.get("id");
+            // 获取更新时间戳
+            LocalDate modifyTime = TimestampToLocalDateTimeDeserializer.deserialize(data.get("modifyTime").toString());
+            // 获取当前时间戳
+            LocalDate now = TimestampToLocalDateTimeDeserializer.deserialize(System.currentTimeMillis() + "");
+            log.info("id: {}, modifyTime: {}, now：{}", trackId, modifyTime, now);
+            // 判断
         }
-
-
-//        for (Map.Entry<String, Object> entry : dataList.get(0).entrySet()) {
-//            log.info("key为：{},value为：{}", entry.getKey(), entry.getValue());
-//
-//        }
-
     }
 }
