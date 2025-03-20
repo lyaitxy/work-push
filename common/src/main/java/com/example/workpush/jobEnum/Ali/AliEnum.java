@@ -1,4 +1,4 @@
-package com.example.workpush.jobEnum;
+package com.example.workpush.jobEnum.Ali;
 
 import lombok.Getter;
 

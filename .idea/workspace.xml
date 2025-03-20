@@ -4,15 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="完成redis部分">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/AliEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java" afterDir="false" />
+    <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="抹去邮箱授权码">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/Ali/CategoryType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/quartzJob/WorkPushJob.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/AliEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/Ali/AliEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/TimestampToLocalDateTimeDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/TimestampToLocalDateTimeDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/jobEnum/AliEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/JavaMailUntil$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/JavaMailUntil$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/JavaMailUntil.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/JavaMailUntil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/TimestampToLocalDateTimeDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/TimestampToLocalDateTimeDeserializer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/entity/resp/AliJobResp.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/impl/AlibabaWorkServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/impl/AlibabaWorkServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/controller/AlibabaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/controller/AlibabaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/entity/resp/AliJobResp.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/impl/AlibabaWorkServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/impl/AlibabaWorkServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,8 +33,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -44,6 +53,9 @@
         <option name="userSettingsFile" value="D:\tools\apache-maven-3.9.9\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
@@ -134,7 +146,7 @@
       <workItem from="1742208980430" duration="8200000" />
       <workItem from="1742290676608" duration="1832000" />
       <workItem from="1742377108373" duration="12252000" />
-      <workItem from="1742453380734" duration="4400000" />
+      <workItem from="1742453380734" duration="10859000" />
     </task>
     <task id="LOCAL-00001" summary="完成redis部分">
       <option name="closed" value="true" />
@@ -144,7 +156,39 @@
       <option name="project" value="LOCAL" />
       <updated>1742386671432</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="完成邮件发送">
+      <option name="closed" value="true" />
+      <created>1742458131247</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742458131247</updated>
+    </task>
+    <task id="LOCAL-00003" summary="完成邮件发送">
+      <option name="closed" value="true" />
+      <created>1742458152283</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742458152283</updated>
+    </task>
+    <task id="LOCAL-00004" summary="完成邮件发送">
+      <option name="closed" value="true" />
+      <created>1742458170734</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742458170734</updated>
+    </task>
+    <task id="LOCAL-00005" summary="抹去邮箱授权码">
+      <option name="closed" value="true" />
+      <created>1742458250349</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1742458250349</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -152,7 +196,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="完成redis部分" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成redis部分" />
+    <MESSAGE value="完成邮件发送" />
+    <MESSAGE value="抹去邮箱授权码" />
+    <option name="LAST_COMMIT_MESSAGE" value="抹去邮箱授权码" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
