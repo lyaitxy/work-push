@@ -4,11 +4,11 @@
 
 1.1、在/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java文件中填入自己的账号和密码，对应着的服务器名也需要修改
 
-![FIG1](.\images\FIG1.png)
+![FIG1](./images/FIG1.png)
 
 1.2、修改web-api模块下的service包下的发件人和收件人
 
-![FIG2](.\images\FIG2.png)
+![FIG2](./images/FIG2.png)
 
 1.3、修改application-dev.yaml中的搜索关键词
 
