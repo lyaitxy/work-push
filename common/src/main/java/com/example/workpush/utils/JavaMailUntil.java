@@ -9,7 +9,7 @@ public final class JavaMailUntil {
     public static Session createSession() {
 
         //	账号信息
-        String username = "18169303631@163.com";//	邮箱发送账号
+        String username = "";//	邮箱发送账号
         String password = "";//	邮箱授权码
 
         //	创建一个配置文件，并保存

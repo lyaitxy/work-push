@@ -125,8 +125,8 @@ public class AlibabaWorkServiceImpl implements AlibabaWorkService {
                 MimeMessage message = new MimeMessage(session);
                 message.setSubject("职位更新");
                 message.setText(sb.toString());
-                message.setFrom(new InternetAddress("18169303631@163.com"));
-                message.setRecipient(Message.RecipientType.TO, new InternetAddress("1412997562@qq.com"));
+                message.setFrom(new InternetAddress(""));
+                message.setRecipient(Message.RecipientType.TO, new InternetAddress(""));
                 Transport.send(message);
             } catch (MessagingException e) {
                 throw new RuntimeException(e);
