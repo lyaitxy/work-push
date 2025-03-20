@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="完成定时清除redis的功能">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="更新README" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -138,7 +136,7 @@
       <workItem from="1742453380734" duration="12311000" />
       <workItem from="1742469871483" duration="4438000" />
       <workItem from="1742477147981" duration="127000" />
-      <workItem from="1742478001739" duration="325000" />
+      <workItem from="1742478001739" duration="806000" />
     </task>
     <task id="LOCAL-00001" summary="完成redis部分">
       <option name="closed" value="true" />
@@ -204,7 +202,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742474061103</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="完成定时清除redis的功能">
+      <option name="closed" value="true" />
+      <created>1742478776796</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742478776796</updated>
+    </task>
+    <task id="LOCAL-00010" summary="更新README">
+      <option name="closed" value="true" />
+      <created>1742478799378</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1742478799378</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -217,7 +231,8 @@
     <MESSAGE value="邮箱中增加链接，新增应届和日常实习" />
     <MESSAGE value="完成定时推送功能" />
     <MESSAGE value="完成定时清除redis的功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="完成定时清除redis的功能" />
+    <MESSAGE value="更新README" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新README" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
