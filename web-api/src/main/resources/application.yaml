@@ -18,9 +18,3 @@ spring:
           max-idle: 8 # 最大空闲连接数
           min-idle: 0 # 最小空闲连接数
           max-wait: 5000 # 最大等待时间
-  mail:
-    host: smtp.163.com
-    port: 25
-    username:
-    password:
-

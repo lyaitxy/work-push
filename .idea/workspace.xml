@@ -4,27 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="更改">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/config/RedisTemplateConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/config/SearchProperties.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/entity/AliJob.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/entity/resp/AliJobResp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/web-api/src/main/resources/application-dev.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="完成redis部分">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/AliEnum.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/TimestampToLocalDateTimeDeserializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/TimestampToLocalDateTimeDeserializer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-api/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/controller/AlibabaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/controller/AlibabaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/AlibabaWorkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/AlibabaWorkService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/impl/AlibabaWorkServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/impl/AlibabaWorkServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web-api/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/target/classes/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/controller/GaoDeController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/pojo/entity/GaoDeWork$GraduationTime.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/pojo/entity/GaoDeWork.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/impl/AlibabaWorkServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/impl/AlibabaWorkServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +23,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -142,12 +133,36 @@
       <workItem from="1741784519628" duration="2833000" />
       <workItem from="1742208980430" duration="8200000" />
       <workItem from="1742290676608" duration="1832000" />
-      <workItem from="1742377108373" duration="7107000" />
+      <workItem from="1742377108373" duration="12252000" />
+      <workItem from="1742453380734" duration="4400000" />
     </task>
+    <task id="LOCAL-00001" summary="完成redis部分">
+      <option name="closed" value="true" />
+      <created>1742386671432</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742386671432</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="完成redis部分" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成redis部分" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

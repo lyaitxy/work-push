@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/gao-de")
+@RequestMapping("/Ali")
 @Slf4j
 public class AlibabaController {
 
