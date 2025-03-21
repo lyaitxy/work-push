@@ -1,1 +1,6 @@
-*.xml
+.idea
+*.iws
+*.iml
+*.ipr
+.mvn
+mvnw*
