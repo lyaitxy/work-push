@@ -5,7 +5,32 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eda2060f-2db5-4ea7-a75e-53d58665b17a" name="更改" comment="更新README">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/config/MyJobFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/config/QuartzConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/config/QuartzConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/config/SearchProperties.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/Ali/CategoryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/jobEnum/Ali/CategoryType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/config/QuartzConfig$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/config/QuartzConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/common/target/classes/com/example/workpush/config/QuartzConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/config/SearchProperties.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/JavaMailUntil$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/com/example/workpush/utils/JavaMailUntil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/controller/JobController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/controller/JobController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/quartzJob/CleanRedisIDJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/quartzJob/CleanRedisIDJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/quartzJob/WorkPushJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/quartzJob/WorkPushJob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/AlibabaWorkService.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/AlibabaWorkService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/impl/AlibabaWorkServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/java/com/example/workpush/service/impl/AlibabaWorkServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/src/main/resources/application-dev.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/src/main/resources/application-dev.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/application-dev.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/application-dev.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/controller/JobController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/controller/JobController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/quartzJob/CleanRedisIDJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/quartzJob/CleanRedisIDJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/quartzJob/WorkPushJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/quartzJob/WorkPushJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/AlibabaWorkService.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/AlibabaWorkService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/impl/AlibabaWorkServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/web-api/target/classes/com/example/workpush/service/impl/AlibabaWorkServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,40 +76,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.common [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.common [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.common [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.web-api [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.web-api [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.web-api [package].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.WorkPushApplication.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.ide.FileNotInSourceRootChecker.no.check&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/javaProjects/work-push&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.30574712&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.common [clean].executor": "Run",
+    "Maven.common [compile].executor": "Run",
+    "Maven.common [package].executor": "Run",
+    "Maven.web-api [clean].executor": "Run",
+    "Maven.web-api [compile].executor": "Run",
+    "Maven.web-api [package].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.WorkPushApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.ide.FileNotInSourceRootChecker.no.check": "true",
+    "git-widget-placeholder": "main",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/javaProjects/work-push",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30574712",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\javaProjects\work-push\web-api\src\main\java\com\example\workpush\service" />
@@ -139,6 +167,7 @@
       <workItem from="1742469871483" duration="4438000" />
       <workItem from="1742477147981" duration="127000" />
       <workItem from="1742478001739" duration="1190000" />
+      <workItem from="1742545269790" duration="2772000" />
     </task>
     <task id="LOCAL-00001" summary="完成redis部分">
       <option name="closed" value="true" />

@@ -15,6 +15,6 @@ public class CleanRedisIDJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("清除redis");
+        redisTemplate.delete("id");
     }
 }

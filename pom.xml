@@ -21,8 +21,7 @@
         <redis.version>2.7.3</redis.version>
         <commonPool.version>2.11.1</commonPool.version>
         <hutool.version>5.8.22</hutool.version>
-        <mail.version>1.6.2</mail.version>
-        <activation.version>1.1</activation.version>
+        <mail.version>3.3.9</mail.version>
         <quartz.version>2.5.0</quartz.version>
     </properties>
 
@@ -60,10 +59,9 @@
                 <version>${hutool.version}</version>
             </dependency>
             <!--发送邮件依赖-->
-            <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
             <dependency>
-                <groupId>com.sun.mail</groupId>
-                <artifactId>javax.mail</artifactId>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-mail</artifactId>
                 <version>${mail.version}</version>
             </dependency>
             <!--quartz任务调度器-->

@@ -2,25 +2,22 @@
 
 #### 1、使用指南
 
-1.1、在/common/src/main/java/com/example/workpush/utils/JavaMailUntil.java文件中填入自己的账号和密码，对应着的服务器名也需要修改
+修改application-dev.yaml中的邮箱配置和打开redis服务器，然后启动项目，在浏览器输入以下url
 
-![FIG1](./images/FIG1.png)
+```
+localhost:8090/Job/getData?to=你的邮箱&type=三种类型&key=关键字
+```
 
-1.2、修改web-api模块下的service包下的发件人和收件人
-
-![FIG2](./images/FIG2.png)
-
-1.3、修改application-dev.yaml中的搜索关键词和打开redis服务器
-
-
+- 三种类型选择。应届校招，暑期实习，日常实习
+- 关键字默认为java
 
 #### 2、项目需完善点
 
-- 部署项目，让用户只需传入接受邮件的邮箱号
-
-- 关键参数（账号、密码等）需修改代码，需移到配置文件中
-
 - 发送邮件界面太粗糙
+
+- 用户如何关闭这个定时发送功能 
+
+- 当前配置的公司太少
 
 - 没有一键投递简历的功能
 

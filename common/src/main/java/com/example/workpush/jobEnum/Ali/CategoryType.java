@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum CategoryType {
-    YJ("freshman", "应届校招"),
-    SX("internship", "暑期实习"),
-    RC("project", "日常实习");
+    YJ("应届校招","freshman"),
+    SX("暑期实习","internship"),
+    RC("日常实习","project");
 
     private final String type;
     private final String desc;
@@ -18,8 +18,8 @@ public enum CategoryType {
 
     public static String getValue(String key) {
         for (CategoryType item : values()) {
-            if (item.type.equals(key)) {
-                return item.desc;
+            if (item.desc.equals(key)) {
+                return item.type;
             }
         }
         return "未知键";

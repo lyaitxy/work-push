@@ -1,2 +1,14 @@
-search:
-  keyword: Java
+spring:
+  mail:
+    host: smtp.163.com
+    port: 465
+    protocol: smtp
+    username: 18169303631@163.com
+    password: AQqizf6NYn3nm2FS
+    properties:
+      mail:
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+            required: true
