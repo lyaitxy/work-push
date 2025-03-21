@@ -1,5 +1,6 @@
 package com.example.workpush.controller;
 
+import cn.hutool.core.lang.Validator;
 import com.example.workpush.quartzJob.CleanRedisIDJob;
 import com.example.workpush.quartzJob.WorkPushJob;
 import jakarta.annotation.Resource;
@@ -19,13 +20,19 @@ public class JobController {
     private Scheduler scheduler;
 
     @GetMapping("/getData")
-    public void getData(
+    public String getData(
             @RequestParam String to,
             @RequestParam(name = "type") String categoryType,
             @RequestParam(required = false, defaultValue = "Java") String key
     ) {
 
-        // TODO 使用正则验证邮箱的格式
+        // 验证邮箱的格式和岗位类型的输入
+        if(!Validator.isEmail(to)) {
+            return "邮箱格式错误";
+        }
+        if(!Objects.equals(categoryType, "应届校招") && !Objects.equals(categoryType, "日常实习") && !Objects.equals(categoryType, "暑期实习")) {
+            return "岗位类型输入错误";
+        }
         try {
 
             // 开启工作推送任务
@@ -60,6 +67,7 @@ public class JobController {
 //            scheduler.scheduleJob(jobDetail2, Set.of(trigger2), true);
 
             scheduler.start();
+            return "正确开启推送！";
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
