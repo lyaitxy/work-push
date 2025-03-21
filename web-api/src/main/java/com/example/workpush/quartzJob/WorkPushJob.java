@@ -1,6 +1,7 @@
 package com.example.workpush.quartzJob;
 
 import com.example.workpush.service.AlibabaWorkService;
+import com.example.workpush.service.MeiTuanWorkService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +26,8 @@ public class WorkPushJob implements Job {
     // 获取结果相关
     @Resource
     private AlibabaWorkService alibabaWorkService;
+    @Resource
+    private MeiTuanWorkService meiTuanWorkService;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -35,7 +38,7 @@ public class WorkPushJob implements Job {
         // 阿里系
         res += alibabaWorkService.pushWork(to, key, categoryType);
         // 美团
-
+        res += meiTuanWorkService.pushWork(to, key, categoryType);
 
         if(!res.isEmpty()) {
             // 发送邮件

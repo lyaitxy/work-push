@@ -3,7 +3,7 @@ package com.example.workpush.jobEnum.Ali;
 import lombok.Getter;
 
 @Getter
-public enum AliEnum {
+public enum AliCompanyEnum {
     GD("talent.amap.com", "高德"),
     ELM("talent.ele.me","饿了吗"),
     ALY("careers.aliyun.com", "阿里云"),
@@ -16,13 +16,13 @@ public enum AliEnum {
     private final String english;
     private final String chinese;
 
-    AliEnum(String english, String chinese) {
+    AliCompanyEnum(String english, String chinese) {
         this.english = english;
         this.chinese = chinese;
     }
 
     public static String getValue(String key) {
-        for (AliEnum item : values()) {
+        for (AliCompanyEnum item : values()) {
             if (item.english.equals(key)) {
                 return item.chinese;
             }
