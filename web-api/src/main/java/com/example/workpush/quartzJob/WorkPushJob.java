@@ -36,9 +36,9 @@ public class WorkPushJob implements Job {
         String key = jobExecutionContext.getJobDetail().getJobDataMap().getString("key");
         String categoryType = jobExecutionContext.getJobDetail().getJobDataMap().getString("categoryType");
         // 阿里系
-        res += alibabaWorkService.pushWork(to, key, categoryType);
+        res += alibabaWorkService.pushWork(to, categoryType, key);
         // 美团
-        res += meiTuanWorkService.pushWork(to, key, categoryType);
+        res += meiTuanWorkService.pushWork(to, categoryType, key);
 
         if(!res.isEmpty()) {
             // 发送邮件
