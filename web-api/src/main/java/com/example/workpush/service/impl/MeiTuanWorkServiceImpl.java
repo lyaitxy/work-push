@@ -41,8 +41,6 @@ public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
         // 将返回的数据转换为map
         List<Map<String, Object>> dataList = JSON.parseObject(datas.toJSONString(), List.class);
 
-        // 设置布尔变量判断是否加入有职位更新这条语句
-        boolean flag = false;
         for(Map<String, Object> data : dataList) {
             // 获得id
             Object id = data.get("jobUnionId");
@@ -54,14 +52,10 @@ public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
             // 判断时间
             if(modifyTime.isEqual(now)) {
                 // 判断当前职位的id是否在redis中
-                boolean isPush = Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(to + "id", id));
+                boolean isPush = Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(to + categoryType + key, id));
                 if(!isPush) {
                     // 说明有职位更新， 将id存入redis中
-                    redisTemplate.opsForSet().add(to + "id", id);
-                    if(!flag) {
-                        sb.append("美团").append("有职位更新：\n");
-                    }
-                    flag = true;
+                    redisTemplate.opsForSet().add(to + categoryType + key, id);;
                     sb.append("https://zhaopin.meituan.com/web/position/detail?jobUnionId=" + id +"&highlightType=campus" + "\n");
                 }
             }
