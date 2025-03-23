@@ -7,6 +7,8 @@ import org.quartz.JobExecutionException;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.util.Set;
+
 @Component
 public class CleanRedisIDJob implements Job {
 
@@ -15,6 +17,9 @@ public class CleanRedisIDJob implements Job {
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        redisTemplate.delete("id");
+        Set<String> keys = redisTemplate.keys("*");
+        if (keys != null) {
+            redisTemplate.delete(keys);
+        }
     }
 }

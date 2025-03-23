@@ -19,6 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <fastjson.version>2.0.56</fastjson.version>
         <redis.version>2.7.3</redis.version>
+        <redisson.version>3.21.1</redisson.version>
         <commonPool.version>2.11.1</commonPool.version>
         <hutool.version>5.8.22</hutool.version>
         <mail.version>3.3.9</mail.version>
@@ -53,6 +54,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-pool2</artifactId>
                 <version>${commonPool.version}</version>
+            </dependency>
+            <!--redisson-->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
             <!--hutool工具包-->
             <dependency>

@@ -12,3 +12,5 @@ spring:
           ssl:
             enable: true
             required: true
+  quartz:
+    job-store-type: jdbc
