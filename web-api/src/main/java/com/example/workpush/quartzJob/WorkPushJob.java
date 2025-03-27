@@ -1,6 +1,7 @@
 package com.example.workpush.quartzJob;
 
 import com.example.workpush.service.AlibabaWorkService;
+import com.example.workpush.service.JingDongWorkService;
 import com.example.workpush.service.MeiTuanWorkService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
@@ -28,6 +29,8 @@ public class WorkPushJob implements Job {
     private AlibabaWorkService alibabaWorkService;
     @Resource
     private MeiTuanWorkService meiTuanWorkService;
+    @Resource
+    private JingDongWorkService jingDongWorkService;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -35,6 +38,8 @@ public class WorkPushJob implements Job {
         String to = jobExecutionContext.getJobDetail().getJobDataMap().getString("to");
         String key = jobExecutionContext.getJobDetail().getJobDataMap().getString("key");
         String categoryType = jobExecutionContext.getJobDetail().getJobDataMap().getString("categoryType");
+        long before = System.currentTimeMillis();
+        // TODO 使用线程池并发发起请求
         // 阿里系
         String data1 = alibabaWorkService.pushWork(to, categoryType, key);
         if(!data1.isEmpty()) {
@@ -47,6 +52,14 @@ public class WorkPushJob implements Job {
             res += "美团有职位更新：\n";
             res += data2;
         }
+        // 京东
+        String data3 = jingDongWorkService.pushWork(to, categoryType, key);
+        if(!data3.isEmpty()) {
+            res += "京东有职位更新：\n";
+            res += data3;
+        }
+        long after = System.currentTimeMillis();
+        log.info("消耗时间为: {}", after - before);
         if(!res.isEmpty()) {
             // 发送邮件
             SimpleMailMessage message = new SimpleMailMessage();

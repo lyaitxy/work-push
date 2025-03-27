@@ -3,12 +3,12 @@ package com.example.workpush.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.example.workpush.service.MeiTuanWorkService;
+import com.example.workpush.service.JingDongWorkService;
 import com.example.workpush.utils.TimestampToLocalDateTimeDeserializer;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,7 +17,7 @@ import java.util.*;
 
 @Service
 @Slf4j
-public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
+public class JingDongWorkServiceImpl implements JingDongWorkService {
 
     @Resource
     private RestTemplate restTemplate;
@@ -31,20 +31,20 @@ public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
 
         // 获取参数体
         Map<String, Object> m = getStringObjectMap(key, categoryType);
-        String url = "https://zhaopin.meituan.com/api/official/job/getJobList";
+        String url = "https://campus.jd.com/api/wx/position/page";
 
         ResponseEntity<String> response = restTemplate.postForEntity(url, m, String.class);
         // 解析返回的数据
-        JSONArray datas = JSONObject.parseObject(response.getBody()).getJSONObject("data").getJSONArray("list");
+        JSONArray datas = JSONObject.parseObject(response.getBody()).getJSONObject("body").getJSONArray("items");
         if(datas == null) return "";
         // 将返回的数据转换为map
         List<Map<String, Object>> dataList = JSON.parseObject(datas.toJSONString(), List.class);
 
         for(Map<String, Object> data : dataList) {
             // 获得id
-            Object id = data.get("jobUnionId");
+            Object id = data.get("publishId");
             // 获取更新时间戳表示的时间
-            LocalDate modifyTime = TimestampToLocalDateTimeDeserializer.deserialize(data.get("refreshTime").toString());
+            LocalDate modifyTime = TimestampToLocalDateTimeDeserializer.deserialize(data.get("publishTime").toString());
             // 获取当前时间戳表示的时间
             LocalDate now = TimestampToLocalDateTimeDeserializer.deserialize(System.currentTimeMillis() + "");
             log.info("id: {}, modifyTime: {}, now：{}", id, modifyTime, now);
@@ -55,7 +55,7 @@ public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
                 if(!isPush) {
                     // 说明有职位更新， 将id存入redis中
                     redisTemplate.opsForSet().add(to + categoryType + key, id);;
-                    sb.append("https://zhaopin.meituan.com/web/position/detail?jobUnionId=" + id +"&highlightType=campus" + "\n");
+                    sb.append("https://campus.jd.com/#/details?id=" + id +"\n");
                 }
             }
         }
@@ -65,35 +65,20 @@ public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
 
     private Map<String, Object> getStringObjectMap(String key, String categoryType) {
         Map<String, Object> m = new HashMap<>();
-        m.put("cityList", new int[]{});
-        m.put("department", new int[]{});
-        m.put("jfJgList", new int[]{});
-        m.put("jobShareType", "1");
-        List<Map<String, Object>> jobTypeList = new ArrayList<>();
-        Map<String, Object> jobTypeEntry = new HashMap<>();
+        Map<String, Object> parameterMap = new HashMap<>();
+        parameterMap.put("positionName", key);
         if(categoryType.equals("应届校招")) {
-            jobTypeEntry.put("code", "1");
-            jobTypeEntry.put("subCode", Arrays.asList("1", "3", "4"));
-            jobTypeList.add(jobTypeEntry);
-            m.put("jobType", jobTypeList);
-        } else if(categoryType.equals("暑期实习")) {
-            jobTypeEntry.put("code", "2");
-            jobTypeEntry.put("subCode", List.of("2"));
-            jobTypeList.add(jobTypeEntry);
-            m.put("jobType", jobTypeList);
+            parameterMap.put("planIdList", new int[]{46});
         } else {
-            jobTypeEntry.put("code", "2");
-            jobTypeEntry.put("subCode", List.of("6"));
-            jobTypeList.add(jobTypeEntry);
-            m.put("jobType", jobTypeList);
+            parameterMap.put("planIdList", new int[]{45});
         }
-        m.put("keywords", key);
-        Map<String, Integer> pageMap = new HashMap<>();
-        pageMap.put("pageNo", 1);
-        pageMap.put("pageSize", 200);
-        m.put("page", pageMap);
-        m.put("r_query_id", "174255515819120298142");
-        m.put("u_query_id", "31518dffd7fc281bd78e82796c6f1e12");
+        parameterMap.put("jobDirectionCodeList", new int[]{});
+        parameterMap.put("workCityCodeList", new int[]{});
+        parameterMap.put("positionDeptList", new int[]{});
+
+        m.put("pageIndex", 0);
+        m.put("pageSize", 20);
+        m.put("parameter", parameterMap);
         return m;
     }
 }

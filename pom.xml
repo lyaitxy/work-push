@@ -26,6 +26,7 @@
         <quartz.version>2.5.0</quartz.version>
         <mysql.version>8.3.0</mysql.version>
         <jdbc.version>3.3.9</jdbc.version>
+        <test.version>3.2.6</test.version>
     </properties>
 
     <parent>
@@ -42,6 +43,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${test.version}</version>
             </dependency>
             <!--redis-->
             <dependency>
