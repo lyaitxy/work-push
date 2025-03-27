@@ -3,6 +3,7 @@ package com.example.workpush.quartzJob;
 import com.example.workpush.service.AlibabaWorkService;
 import com.example.workpush.service.JingDongWorkService;
 import com.example.workpush.service.MeiTuanWorkService;
+import com.example.workpush.service.XHSWorkService;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,8 @@ public class WorkPushJob implements Job {
     private MeiTuanWorkService meiTuanWorkService;
     @Resource
     private JingDongWorkService jingDongWorkService;
+    @Resource
+    private XHSWorkService xhsWorkService;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -57,6 +60,12 @@ public class WorkPushJob implements Job {
         if(!data3.isEmpty()) {
             res += "京东有职位更新：\n";
             res += data3;
+        }
+        // 小红书
+        String data4 = xhsWorkService.pushWork(to, categoryType, key);
+        if(!data4.isEmpty()) {
+            res += "小红书有职位更新：\n";
+            res += data4;
         }
         long after = System.currentTimeMillis();
         log.info("消耗时间为: {}", after - before);
