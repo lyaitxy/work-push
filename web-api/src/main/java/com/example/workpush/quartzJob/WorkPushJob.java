@@ -4,9 +4,7 @@ import com.example.workpush.service.AlibabaWorkService;
 import com.example.workpush.service.JingDongWorkService;
 import com.example.workpush.service.MeiTuanWorkService;
 import com.example.workpush.service.XHSWorkService;
-import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -43,6 +41,7 @@ public class WorkPushJob implements Job {
         String categoryType = jobExecutionContext.getJobDetail().getJobDataMap().getString("categoryType");
         long before = System.currentTimeMillis();
         // TODO 使用线程池并发发起请求
+        // new ThreadPoolExecutor(5, 8, 1000, TimeUnit.MILLISECONDS)
         // 阿里系
         String data1 = alibabaWorkService.pushWork(to, categoryType, key);
         if(!data1.isEmpty()) {
@@ -51,19 +50,19 @@ public class WorkPushJob implements Job {
         }
         // 美团
         String data2 = meiTuanWorkService.pushWork(to, categoryType, key);
-        if(!data2.isEmpty()) {
+        if(data2 != null && !data2.isEmpty()) {
             res += "美团有职位更新：\n";
             res += data2;
         }
         // 京东
         String data3 = jingDongWorkService.pushWork(to, categoryType, key);
-        if(!data3.isEmpty()) {
+        if(data3 != null && !data3.isEmpty()) {
             res += "京东有职位更新：\n";
             res += data3;
         }
         // 小红书
         String data4 = xhsWorkService.pushWork(to, categoryType, key);
-        if(!data4.isEmpty()) {
+        if(data4 != null && !data4.isEmpty()) {
             res += "小红书有职位更新：\n";
             res += data4;
         }

@@ -5,65 +5,24 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.workpush.service.MeiTuanWorkService;
 import com.example.workpush.utils.TimestampToLocalDateTimeDeserializer;
-import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
 @Slf4j
-public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
-
-    @Resource
-    private RestTemplate restTemplate;
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
+public class MeiTuanWorkServiceImpl extends AbstractWorkService implements MeiTuanWorkService {
 
     @Override
-    public String pushWork(String to, String categoryType, String key) {
-        // 构建返回结果
-        StringBuilder sb = new StringBuilder();
-
-        // 获取参数体
-        Map<String, Object> m = getStringObjectMap(key, categoryType);
-        String url = "https://zhaopin.meituan.com/api/official/job/getJobList";
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, m, String.class);
-        // 解析返回的数据
-        JSONArray datas = JSONObject.parseObject(response.getBody()).getJSONObject("data").getJSONArray("list");
-        if(datas == null) return "";
-        // 将返回的数据转换为map
-        List<Map<String, Object>> dataList = JSON.parseObject(datas.toJSONString(), List.class);
-
-        for(Map<String, Object> data : dataList) {
-            // 获得id
-            Object id = data.get("jobUnionId");
-            // 获取更新时间戳表示的时间
-            LocalDate modifyTime = TimestampToLocalDateTimeDeserializer.deserialize(data.get("refreshTime").toString());
-            // 获取当前时间戳表示的时间
-            LocalDate now = TimestampToLocalDateTimeDeserializer.deserialize(System.currentTimeMillis() + "");
-            log.info("id: {}, modifyTime: {}, now：{}", id, modifyTime, now);
-            // 判断时间
-            if(modifyTime.isEqual(now)) {
-                // 判断当前职位的id是否在redis中
-                boolean isPush = Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(to + categoryType + key, id));
-                if(!isPush) {
-                    // 说明有职位更新， 将id存入redis中
-                    redisTemplate.opsForSet().add(to + categoryType + key, id);;
-                    sb.append("https://zhaopin.meituan.com/web/position/detail?jobUnionId=" + id +"&highlightType=campus" + "\n");
-                }
-            }
-        }
-
-        return sb.toString();
+    protected HttpHeaders buildHeaders(String categoryType) {
+        return new HttpHeaders();
     }
 
-    private Map<String, Object> getStringObjectMap(String key, String categoryType) {
+    @Override
+    protected Map<String, Object> buildRequestParams(String key, String categoryType) {
         Map<String, Object> m = new HashMap<>();
         m.put("cityList", new int[]{});
         m.put("department", new int[]{});
@@ -95,5 +54,34 @@ public class MeiTuanWorkServiceImpl implements MeiTuanWorkService {
         m.put("r_query_id", "174255515819120298142");
         m.put("u_query_id", "31518dffd7fc281bd78e82796c6f1e12");
         return m;
+    }
+
+    @Override
+    protected String getRequestUrl(String categoryType) {
+        return "https://zhaopin.meituan.com/api/official/job/getJobList";
+    }
+
+    @Override
+    protected List<Map<String, Object>> parseResponse(String responseBody) {
+        // 解析返回的数据
+        JSONArray datas = JSONObject.parseObject(responseBody).getJSONObject("data").getJSONArray("list");
+        if(datas == null) return null;
+        // 将返回的数据转换为map
+        return JSON.parseObject(datas.toJSONString(), List.class);
+    }
+
+    @Override
+    protected Object extractId(Map<String, Object> data) {
+        return data.get("jobUnionId");
+    }
+
+    @Override
+    protected LocalDate extractModifyTime(Map<String, Object> data) {
+        return TimestampToLocalDateTimeDeserializer.deserialize(data.get("refreshTime").toString());
+    }
+
+    @Override
+    protected String buildDetailUrl(Object id) {
+        return "https://zhaopin.meituan.com/web/position/detail?jobUnionId=" + id +"&highlightType=campus";
     }
 }
