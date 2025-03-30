@@ -1,6 +1,7 @@
 package com.example.workpush.service.impl;
 
 import com.example.workpush.service.JingDongWorkService;
+import com.example.workpush.service.KuaiShoService;
 import com.example.workpush.service.MeiTuanWorkService;
 import com.example.workpush.service.XHSWorkService;
 import jakarta.annotation.Resource;
@@ -18,6 +19,8 @@ class WorkServiceImplTest {
     private MeiTuanWorkService meiTuanWorkService;
     @Resource
     private XHSWorkService xhsWorkService;
+    @Resource
+    private KuaiShoService kuaiShoService;
 
     @Test
     void test1() throws InterruptedException {
@@ -36,6 +39,13 @@ class WorkServiceImplTest {
     @Test
     void test3() throws InterruptedException {
         String s = xhsWorkService.pushWork("1412997562@qq.com", "暑期实习", "算法");
+        Thread.sleep(5000);
+        log.info("结果为：{}", s);
+    }
+
+    @Test
+    void test4() throws InterruptedException {
+        String s = kuaiShoService.pushWork("1412997562@qq.com", "暑期实习", "算法");
         Thread.sleep(5000);
         log.info("结果为：{}", s);
     }

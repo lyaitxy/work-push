@@ -36,11 +36,11 @@ public abstract class AbstractWorkService {
         for (Map<String, Object> data : dataList) {
             Object id = extractId(data);
             LocalDate modifyTime = extractModifyTime(data);
-            log.info("id: {}, modifyTime: {}, now：{}, url: {}", id, modifyTime, now, url);
+            log.info("id: {}, modifyTime: {}, now：{}, company: {}", id, modifyTime, now, getCompanyName());
             if (modifyTime.isEqual(now)) {
-                boolean isPush = Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(to + categoryType + key, id));
+                boolean isPush = Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(to + categoryType + key, getCompanyName() + id));
                 if (!isPush) {
-                    redisTemplate.opsForSet().add(to + categoryType + key, id);
+                    redisTemplate.opsForSet().add(to + categoryType + key, getCompanyName() + id);
                     sb.append(buildDetailUrl(id)).append("\n");
                 }
             }
@@ -49,6 +49,9 @@ public abstract class AbstractWorkService {
     }
 
     // 各个子类必须实现以下抽象方法，以适应不同平台的差异
+
+    // 获取当前的公司名称
+    protected abstract String getCompanyName();
 
     // 请求头实现，可以根据需要在子类中重写加入 token 等信息
     protected abstract HttpHeaders buildHeaders(String categoryType);

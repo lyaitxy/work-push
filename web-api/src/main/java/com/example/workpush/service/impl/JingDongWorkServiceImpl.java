@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.workpush.service.JingDongWorkService;
 import com.example.workpush.utils.TimestampToLocalDateTimeDeserializer;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +12,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Service
-@Slf4j
 public class JingDongWorkServiceImpl extends AbstractWorkService implements JingDongWorkService {
+
+    @Override
+    protected String getCompanyName() {
+        return "JingDong";
+    }
 
     @Override
     protected HttpHeaders buildHeaders(String categoryType) {

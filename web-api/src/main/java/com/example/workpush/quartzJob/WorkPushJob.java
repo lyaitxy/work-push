@@ -1,9 +1,6 @@
 package com.example.workpush.quartzJob;
 
-import com.example.workpush.service.AlibabaWorkService;
-import com.example.workpush.service.JingDongWorkService;
-import com.example.workpush.service.MeiTuanWorkService;
-import com.example.workpush.service.XHSWorkService;
+import com.example.workpush.service.*;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
@@ -32,6 +29,8 @@ public class WorkPushJob implements Job {
     private JingDongWorkService jingDongWorkService;
     @Resource
     private XHSWorkService xhsWorkService;
+    @Resource
+    private KuaiShoService kuaiShoService;
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
@@ -65,6 +64,12 @@ public class WorkPushJob implements Job {
         if(data4 != null && !data4.isEmpty()) {
             res += "小红书有职位更新：\n";
             res += data4;
+        }
+        // 快手
+        String data5 = kuaiShoService.pushWork(to, categoryType, key);
+        if(data5 != null && !data5.isEmpty()) {
+            res += "快手有职位更新：\n";
+            res += data5;
         }
         long after = System.currentTimeMillis();
         log.info("消耗时间为: {}", after - before);
