@@ -6,10 +6,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+
+import java.util.concurrent.*;
+import java.util.function.Supplier;
 
 @Component
 @Slf4j
@@ -32,6 +37,10 @@ public class WorkPushJob implements Job {
     @Resource
     private KuaiShoService kuaiShoService;
 
+    @Resource
+    @Qualifier("customThreadPoolExecutor")
+    private Executor customThreadPoolExecutor;
+
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         String res = "";
@@ -39,38 +48,29 @@ public class WorkPushJob implements Job {
         String key = jobExecutionContext.getJobDetail().getJobDataMap().getString("key");
         String categoryType = jobExecutionContext.getJobDetail().getJobDataMap().getString("categoryType");
         long before = System.currentTimeMillis();
-        // TODO 使用线程池并发发起请求
-        // new ThreadPoolExecutor(5, 8, 1000, TimeUnit.MILLISECONDS)
-        // 阿里系
-        String data1 = alibabaWorkService.pushWork(to, categoryType, key);
-        if(!data1.isEmpty()) {
-            res += "阿里有职位更新：\n";
-            res += data1;
+        // 并发任务，调用复用方法
+        CompletableFuture<String> aliFuture = fetchJobUpdate(() -> alibabaWorkService.pushWork(to, categoryType, key), "阿里", customThreadPoolExecutor);
+        CompletableFuture<String> MTFuture = fetchJobUpdate(() -> meiTuanWorkService.pushWork(to, categoryType, key), "美团", customThreadPoolExecutor);
+        CompletableFuture<String> JDFuture = fetchJobUpdate(() -> jingDongWorkService.pushWork(to, categoryType, key), "京东", customThreadPoolExecutor);
+        CompletableFuture<String> XHSFuture = fetchJobUpdate(() -> xhsWorkService.pushWork(to, categoryType, key), "小红书", customThreadPoolExecutor);
+        CompletableFuture<String> KSFuture = fetchJobUpdate(() -> kuaiShoService.pushWork(to, categoryType, key), "快手", customThreadPoolExecutor);
+
+        CompletableFuture<Void> all = CompletableFuture.allOf(aliFuture, MTFuture, JDFuture, XHSFuture, KSFuture);
+        CompletableFuture<String> resultFuture = all.thenApply(v -> {
+            try {
+                return aliFuture.get() + MTFuture.get() + JDFuture.get() + XHSFuture.get() + KSFuture.get();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+                return "";
+            }
+        });
+
+        try {
+            res = resultFuture.get();
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
         }
-        // 美团
-        String data2 = meiTuanWorkService.pushWork(to, categoryType, key);
-        if(data2 != null && !data2.isEmpty()) {
-            res += "美团有职位更新：\n";
-            res += data2;
-        }
-        // 京东
-        String data3 = jingDongWorkService.pushWork(to, categoryType, key);
-        if(data3 != null && !data3.isEmpty()) {
-            res += "京东有职位更新：\n";
-            res += data3;
-        }
-        // 小红书
-        String data4 = xhsWorkService.pushWork(to, categoryType, key);
-        if(data4 != null && !data4.isEmpty()) {
-            res += "小红书有职位更新：\n";
-            res += data4;
-        }
-        // 快手
-        String data5 = kuaiShoService.pushWork(to, categoryType, key);
-        if(data5 != null && !data5.isEmpty()) {
-            res += "快手有职位更新：\n";
-            res += data5;
-        }
+
         long after = System.currentTimeMillis();
         log.info("消耗时间为: {}", after - before);
         if(!res.isEmpty()) {
@@ -85,4 +85,16 @@ public class WorkPushJob implements Job {
             log.info("数据为空，不发邮件");
         }
     }
+
+    private CompletableFuture<String> fetchJobUpdate(
+            Supplier<String> supplier,
+            String platformName,
+            Executor executor
+    ) {
+        return CompletableFuture.supplyAsync(() -> {
+            String data = supplier.get();
+            return (data != null && !data.isEmpty()) ? platformName + "有职位更新：\n" + data : "";
+        }, executor);
+    }
+
 }

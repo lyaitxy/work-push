@@ -27,6 +27,8 @@
         <mysql.version>8.3.0</mysql.version>
         <jdbc.version>3.3.9</jdbc.version>
         <test.version>3.2.6</test.version>
+        <redisson.version>3.11.1</redisson.version>
+        <c3p0.version>0.9.5.5</c3p0.version>
     </properties>
 
     <parent>
@@ -95,6 +97,16 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-jdbc</artifactId>
                 <version>${jdbc.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson</artifactId>
+                <version>${redisson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.mchange</groupId>
+                <artifactId>c3p0</artifactId>
+                <version>${c3p0.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
